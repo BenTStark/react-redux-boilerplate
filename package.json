@@ -4,10 +4,11 @@
   "description": "Basic React Redux Boilerplate",
   "main": "index.js",
   "scripts": {
-    "build": "npm run build-server && npm run build-client",
-    "build-server": "babel src/server --out-dir ./dist",
-    "build-client": "babel src/client --copy-files --out-dir ./dist/public",
-    "start": "node ./dist/index.js"
+    "build-babel": "npm run build-babel-server && npm run build-babel-client",
+    "build-babel-server": "babel src/server --out-dir ./dist",
+    "build-babel-client": "babel src/client --copy-files --out-dir ./dist/public",
+    "start": "node ./dist/index.js",
+    "test": "jest ./src"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,11 @@
   "bugs": {
     "url": "https://github.com/BenTStark/react-redux-boilerplate/issues"
   },
-  "homepage": "https://github.com/BenTStark/react-redux-boilerplate#readme"
+  "homepage": "https://github.com/BenTStark/react-redux-boilerplate#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "jest": "^23.6.0"
+  }
 }

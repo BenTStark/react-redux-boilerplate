@@ -1,4 +1,4 @@
-import WebServer from './web.server'
+import WebServer from './webserver'
 let webServer = new WebServer();
 webServer.start()
   .then(() => {
