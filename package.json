@@ -1,7 +1,7 @@
 {
   "name": "react-redux-boilerplate",
   "version": "1.0.0",
-  "description": "This Boilerplate is the base for React-Redux Websites. Additionial functionalities and code will be provided in the toolbox repository.",
+  "description": "Basic React Redux Boilerplate",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +10,11 @@
     "type": "git",
     "url": "git+https://github.com/BenTStark/react-redux-boilerplate.git"
   },
+  "keywords": [
+    "Node",
+    "React",
+    "Redux"
+  ],
   "author": "BenTStark",
   "license": "MIT",
   "bugs": {
