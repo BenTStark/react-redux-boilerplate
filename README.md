@@ -22,4 +22,4 @@ Runs the [rimraf](https://www.npmjs.com/package/rimraf) package for cleaninig up
 
     # npm test
 
-Running Test with jest package on webserver
+Running Test with [jest](https://jestjs.io/docs/en/getting-started) package on webserver
