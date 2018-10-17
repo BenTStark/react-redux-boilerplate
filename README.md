@@ -2,7 +2,7 @@
 
 This Boilerplate is the base for React-Redux Websites. Additionial functionalities and code will be provided in the toolbox repository. The main sceleton was build according to [react-boilerplate tutorial](https://medium.freecodecamp.org/how-to-build-your-own-react-boilerplate-2f8cbbeb9b3f) by Nick Karnik. Great Thanks to him.
 
-I updated the original tutorial devDependencies to webpack 4.x and babel 7.x
+I updated the original tutorial devDependencies to [webpack 4.x](https://webpack.js.org/) and [babel 7.x](https://babeljs.io/).
 
 ## Setup
 
