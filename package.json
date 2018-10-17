@@ -4,10 +4,12 @@
   "description": "Basic React Redux Boilerplate",
   "main": "index.js",
   "scripts": {
+    "build": "webpack",
     "build-babel": "npm run build-babel-server && npm run build-babel-client",
     "build-babel-server": "babel src/server --out-dir ./dist",
     "build-babel-client": "babel src/client --copy-files --out-dir ./dist/public",
-    "start": "node ./dist/index.js",
+    "start": "node ./dist/server.js",
+    "clean": "rimraf dist node_modules",
     "test": "jest ./src"
   },
   "repository": {
@@ -26,9 +28,22 @@
   },
   "homepage": "https://github.com/BenTStark/react-redux-boilerplate#readme",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "jest": "^23.6.0"
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^23.6.0",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2"
   }
 }
