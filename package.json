@@ -50,7 +50,13 @@
   "dependencies": {
     "express": "^4.16.4",
     "react": "^16.5.2",
-    "react-dom": "^16.5.2"
+    "react-dom": "^16.5.2",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
+    "react-router-redux": "^4.0.8",
+    "redux": "^4.0.1",
+    "redux-connect": "^8.0.0",
+    "redux-thunk": "^2.3.0"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "./src/enzyme.setup.js"
