@@ -8,7 +8,8 @@ import thunkMiddleware from "redux-thunk";
 import { ReduxAsyncConnect } from "redux-connect";
 
 //import rootReducer from './reducers/reducer';
-import App from "./app";
+
+import getRoutes from "./routes";
 
 const store = createStore(
   rootReducer,
@@ -29,7 +30,7 @@ const component = (
     )}
     history={history}
   >
-    <App />
+    {getRoutes(store)}
   </Router>
 );
 
