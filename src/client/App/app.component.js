@@ -22,33 +22,35 @@ export default class AppComponent extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (!this.props.user && nextProps.user) {
-      // login
-      this.props.pushState('/loginSuccess');
-    } else if (this.props.user && !nextProps.user) {
-      // logout
-      this.props.pushState('/');
-    }
+    // if (!this.props.user && nextProps.user) {
+    //   // login
+    //   //this.props.pushState('/loginSuccess');
+    // } else if (this.props.user && !nextProps.user) {
+    //   // logout
+    //   this.props.pushState('/');
+    // }
   }
 
+  // tbd: handle Login bauen. Das wird hier nämlich über eine extra seite gemacht
   handleLogout = (event) => {
     event.preventDefault();
     this.props.logout();
   };
 
   render() {
-    const {user} = this.props;
-    const styles = require('./App.scss');
+    //const {user} = this.props;
+    const styles = require('./app.scss');
 
     return (
       <div className={styles.app}>
-        <Helmet {...config.app.head}/>
+        // tbd: sieht nützlich aus, aber muss ich erst noch verstehen
+        //<Helmet {...config.app.head}/>
         <Navbar fixedTop>
           <Navbar.Header>
             <Navbar.Brand>
               <IndexLink to="/" activeStyle={{color: '#33e0ff'}}>
-                <div className={styles.brand}/>
-                <span>{config.app.title}</span>
+                <div className={styles.brand}//>
+                <span>React-Reduc-Boilerplate</span>
               </IndexLink>
             </Navbar.Brand>
             <Navbar.Toggle/>
@@ -56,19 +58,11 @@ export default class AppComponent extends Component {
 
           <Navbar.Collapse eventKey={0}>
             <Nav navbar>
+
               // {user && <LinkContainer to="/chat">
               //   <NavItem eventKey={1}>Chat</NavItem>
               // </LinkContainer>}
 
-              // <LinkContainer to="/widgets">
-              //   <NavItem eventKey={2}>Widgets</NavItem>
-              // </LinkContainer>
-              // <LinkContainer to="/survey">
-              //   <NavItem eventKey={3}>Survey</NavItem>
-              // </LinkContainer>
-              // <LinkContainer to="/pagination">
-              //   <NavItem eventKey={4}>Pagination</NavItem>
-              // </LinkContainer>
               // <LinkContainer to="/about">
               //   <NavItem eventKey={5}>About Us</NavItem>
               // </LinkContainer>
@@ -87,7 +81,7 @@ export default class AppComponent extends Component {
             {user &&
             <p className={styles.loggedInMessage + ' navbar-text'}>Logged in as <strong>{user.name}</strong>.</p>}
             <Nav navbar pullRight>
-              <NavItem eventKey={1} target="_blank" title="View on Github" href="https://github.com/erikras/react-redux-universal-hot-example">
+              <NavItem eventKey={1} target="_blank" title="View on Github" href="https://github.com/BenTStark/react-redux-boilerplate">
                 <i className="fa fa-github"/>
               </NavItem>
             </Nav>
@@ -97,14 +91,9 @@ export default class AppComponent extends Component {
         <div className={styles.appContent}>
           {this.props.children}
         </div>
-        //<InfoBar/>
 
-        <div className="well text-center">
-          Have questions? Ask for help <a
-          href="https://github.com/erikras/react-redux-universal-hot-example/issues"
-          target="_blank">on Github</a> or in the <a
-          href="https://discord.gg/0ZcbPKXt5bZZb1Ko" target="_blank">#react-redux-universal</a> Discord channel.
-        </div>
+        <div>
+          Footer
       </div>
     );
   }

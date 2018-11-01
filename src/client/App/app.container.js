@@ -31,8 +31,8 @@ import AppComponent from './app.component';
 
 const mapStateToProps = state => {
   // tbd: sind die UserInfos in dem Reducer?
-  const { user } = state.AppReducer;
-  return { user }
+  const { auth } = state.authReducer;
+  return { auth }
 };
 
 const mapDispatchToProps = dispatch => {

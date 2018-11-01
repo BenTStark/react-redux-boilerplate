@@ -5,7 +5,7 @@ import {
     AppContainer,
     HomeContainer,
 // Add Here all other container and components
-} from './components';
+} from './container';
 
 export default (store) => {
   // tbd: check how to use this in order to implement LoginSuccess

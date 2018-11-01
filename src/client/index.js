@@ -26,7 +26,7 @@ const destination = document.getElementById("root");
 const component = (
   <Router
     render={props => (
-      <ReduxAsyncConnect {...props} filter={item => !item.deferred} />
+      <ReduxAsyncConnect {...props} /*filter={item => !item.deferred}*/ />
     )}
     history={history}
   >
