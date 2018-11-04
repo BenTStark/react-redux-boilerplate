@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Router, browserHistory } from "react-router";
+import { Router, browserHistory } from "react-router-dom";
 import { syncHistoryWithStore } from "react-router-redux";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";

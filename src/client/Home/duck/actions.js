@@ -1,10 +1,12 @@
-import types from './types.js';
+import types from "./types.js";
 
-const defaultAction = (value) => {
+const defaultAction = value => {
+  return {
     type: types.DEFAULT_ACTION,
     value: value
+  };
 };
 
 export default {
-    defaultAction
-}
+  defaultAction
+};

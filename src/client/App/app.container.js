@@ -1,8 +1,7 @@
-import { connect } from 'react-redux';
-import AppComponent from './app.component';
+import { connect } from "react-redux";
+import AppComponent from "./app.component";
 // tbd: schauen ob ich das Brauche...vermutlich für Login Behandlung
 //import { AppOperations } from './duck';
-
 
 //import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 //import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
@@ -32,18 +31,25 @@ import AppComponent from './app.component';
 const mapStateToProps = state => {
   // tbd: sind die UserInfos in dem Reducer?
   const { auth } = state.authReducer;
-  return { auth }
+  return { auth };
 };
 
 const mapDispatchToProps = dispatch => {
+  const loginRequest = () => dispatch(AppOperations.loginRequest());
+  const loginSuccess = authInformation =>
+    dispatch(AppOperations.loginSuccess(authInformation));
+  const loginError = () => dispatch(AppOperations.loginError());
   const logout = () => dispatch(AppOperations.logout());
 
   return {
+    loginRequest,
+    loginSuccess,
+    loginError,
     logout
-  }
+  };
 };
 
-const <AppContainer = connect(
+const AppContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(AppComponent);
