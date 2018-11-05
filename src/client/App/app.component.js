@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from "react";
-import { IndexLink } from "react-router-dom";
+//import { IndexLink } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import Navbar from "react-bootstrap/lib/Navbar";
 import Nav from "react-bootstrap/lib/Nav";
@@ -8,20 +8,20 @@ import NavItem from "react-bootstrap/lib/NavItem";
 import * as AuthService from "./duck/auth";
 // Ein Element aus der erikras repo
 //import { InfoBar } from 'components';
+import getRoutes from "../routes";
 
-export default class AppComponent extends Component {
-  static propTypes = {
-    //children: PropTypes.object.isRequired,
-    profile: PropTypes.object
-    //accessToken: PropTypes.object
-    //logout: PropTypes.func.isRequired,
-    //pushState: PropTypes.func.isRequired
-  };
+export class AppComponent extends Component {
+  // static propTypes = {
+  //   //children: PropTypes.object.isRequired,
+  //   profile: PropTypes.object
+  //   //accessToken: PropTypes.object
+  //   //logout: PropTypes.func.isRequired,
+  //   //pushState: PropTypes.func.isRequired
+  // };
 
-  static contextTypes = {
-    store: PropTypes.object.isRequired
-  };
-
+  // static contextTypes = {
+  //   store: PropTypes.object.isRequired
+  // };
   componentWillMount() {
     // Add callback for lock's `authenticated` event
     AuthService.lock.on("authenticated", authResult => {
@@ -33,7 +33,7 @@ export default class AppComponent extends Component {
         AuthService.setToken(authResult.idToken, authResult.accessToken); // static method
         AuthService.setProfile(profile); // static method
         this.props.loginSuccess(profile, authResult.accessToken);
-        //this.props.historyPush('/');
+        this.props.push("/");
         AuthService.lock.hide();
       });
     });
@@ -41,7 +41,7 @@ export default class AppComponent extends Component {
     AuthService.lock.on("authorization_error", error => {
       //this.props.loginError(error);
       this.props.loginError();
-      //this.props.historyPush('/');
+      this.props.push("/");
     });
   }
 
@@ -55,7 +55,7 @@ export default class AppComponent extends Component {
     //event.preventDefault();
     this.props.logout();
     AuthService.logout(); // careful, this is a static method
-    //this.props.historyPush('/');
+    this.props.push("/");
   };
 
   render() {
@@ -64,60 +64,42 @@ export default class AppComponent extends Component {
 
     return (
       <div className={styles.app}>
-        // tbd: sieht nützlich aus, aber muss ich erst noch verstehen
-        //<Helmet {...config.app.head}/>
+        {/* tbd: sieht nützlich aus, aber muss ich erst noch verstehen
+          <Helmet {...config.app.head}/>*/}
         <Navbar fixedTop>
           <Navbar.Header>
             <Navbar.Brand>
-              <IndexLink to="/" activeStyle={{ color: "#33e0ff" }}>
-                <div className={styles.brand} />
-                <span>React-Reduc-Boilerplate</span>
-              </IndexLink>
+              <LinkContainer to="/" activeStyle={{ color: "#ffffff" }}>
+                <div className={styles.brand}>
+                  <span>React-Redux-Boilerplate</span>
+                </div>
+              </LinkContainer>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
 
-          <Navbar.Collapse eventKey={0}>
+          <Navbar.Collapse>
             <Nav navbar>
-              //{" "}
-              {user && (
-                <LinkContainer to="/chat">
-                  // <NavItem eventKey={1}>Chat</NavItem>
-                  //{" "}
-                </LinkContainer>
+              {!this.props.auth.loginSuccess && (
+                <NavItem onClick={this.handleLogin}>Login</NavItem>
               )}
-              //{" "}
-              <LinkContainer to="/about">
-                // <NavItem eventKey={5}>About Us</NavItem>
-                //{" "}
+              {this.props.auth.loginSuccess && (
+                <NavItem onClick={this.handleLogout}>Logout</NavItem>
+              )}
+              <LinkContainer to="/callback">
+                <NavItem>Callback</NavItem>
               </LinkContainer>
-              {!auth.loginSuccess && (
-                <LinkContainer /*to="/login"*/>
-                  <NavItem eventKey={6} onClick={this.handleLogin}>
-                    Login
-                  </NavItem>
-                </LinkContainer>
-              )}
-              {auth.loginSuccess && (
-                <LinkContainer to="/">
-                  <NavItem
-                    eventKey={7}
-                    className="logout-link"
-                    onClick={this.handleLogout}
-                  >
-                    Logout
-                  </NavItem>
-                </LinkContainer>
-              )}
+              <LinkContainer to="/test">
+                <NavItem>Test</NavItem>
+              </LinkContainer>
             </Nav>
-            {auth.loginSuccess && (
+            {this.props.auth.loginSuccess && (
               <p className={styles.loggedInMessage + " navbar-text"}>
-                Logged in as <strong>{auth.profile.nickname}</strong>.
+                Logged in as <strong>{this.props.auth.profile.nickname}</strong>.
               </p>
             )}
             <Nav navbar pullRight>
               <NavItem
-                eventKey={1}
                 target="_blank"
                 title="View on Github"
                 href="https://github.com/BenTStark/react-redux-boilerplate"
@@ -127,9 +109,39 @@ export default class AppComponent extends Component {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        <div className={styles.appContent}>{this.props.children}</div>
+        {getRoutes()}
         <div>Footer</div>
       </div>
     );
   }
 }
+
+export default AppComponent;
+
+// {user && (
+//   <LinkContainer to="/chat">
+//     <NavItem eventKey={1}>Chat</NavItem>
+//   </LinkContainer>
+// )}
+// <LinkContainer to="/about">
+//    <NavItem eventKey={5}>About Us</NavItem>
+// </LinkContainer>
+
+// {!this.props.auth.loginSuccess && <LinkContainer>// /*to="/login"*/>
+//     <NavItem eventKey={6} onClick={this.handleLogin}>
+//       Login
+//     </NavItem>
+//   </LinkContainer>
+// }
+
+// {this.props.auth.loginSuccess &&
+//   <LinkContainer to="/">
+//     <NavItem
+//       eventKey={7}
+//       className="logout-link"
+//       onClick={this.handleLogout}
+//     >
+//       Logout
+//     </NavItem>
+//   </LinkContainer>
+// }

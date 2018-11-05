@@ -26,10 +26,10 @@ function loginError(state) {
   return { ...state, loginRequest: false, loginError: true };
 }
 
-unction logout(state) {
+function logout(state) {
   return {
     ...state,
-    user: null
+    user: null,
     accessToken: null,
     loginRequest: false,
     loginSuccess: false

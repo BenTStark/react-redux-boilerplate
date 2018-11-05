@@ -1,17 +1,17 @@
-import types from "./types.js";
+import types from "./index";
 
 const loginRequest = () => {
   return { type: types.LOGIN_REQUEST };
 };
 
-const loginRequest = authInformation => {
+const loginSuccess = authInformation => {
   return {
     type: types.LOGIN_SUCCESS,
     payload: authInformation
   };
 };
 
-const loginRequest = () => {
+const loginError = () => {
   return {
     type: types.LOGIN_ERROR
   };

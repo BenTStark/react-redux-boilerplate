@@ -35,6 +35,8 @@ const client = {
     filename: "[name].js",
     path: path.resolve(__dirname, "dist/public")
   },
+  devtool: 'source-map',
+  mode: 'development',
   module: moduleObj,
   plugins: [
     new HtmlWebPackPlugin({
@@ -47,6 +49,7 @@ const server = {
     server: "./src/server/index.js"
   },
   target: "node",
+  mode: 'development',
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "dist")

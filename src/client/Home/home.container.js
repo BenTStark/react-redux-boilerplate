@@ -16,8 +16,7 @@ const mapStateToProps = state => {
 // };
 
 const HomeContainer = connect(
-  mapStateToProps,
-  Null
+  mapStateToProps
 )(HomeComponent);
 
 export default HomeContainer;

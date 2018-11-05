@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
+import { push } from "connected-react-router";
 import AppComponent from "./app.component";
-// tbd: schauen ob ich das Brauche...vermutlich für Login Behandlung
-//import { AppOperations } from './duck';
+import { AppOperations } from "./duck/index";
 
 //import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 //import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
@@ -30,8 +30,7 @@ import AppComponent from "./app.component";
 
 const mapStateToProps = state => {
   // tbd: sind die UserInfos in dem Reducer?
-  const { auth } = state.authReducer;
-  return { auth };
+  return { auth: state.authReducer };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -40,18 +39,20 @@ const mapDispatchToProps = dispatch => {
     dispatch(AppOperations.loginSuccess(authInformation));
   const loginError = () => dispatch(AppOperations.loginError());
   const logout = () => dispatch(AppOperations.logout());
+  const push = pathname => dispatch(push(pathname));
 
   return {
     loginRequest,
     loginSuccess,
     loginError,
-    logout
+    logout,
+    push
   };
 };
 
-const AppContainer = connect(
+export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
+  null,
+  {pure: false}
 )(AppComponent);
-
-export default AppContainer;

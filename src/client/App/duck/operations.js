@@ -6,9 +6,11 @@ const loginSuccess = authInformation => Creators.loginSuccess(authInformation);
 const loginError = () => Creators.loginError();
 const logout = () => Creators.logout();
 
-export default {
+export const AppOperations = {
   loginRequest,
   loginSuccess,
   loginError,
-  logout
+  logout,
 };
+
+//export default AppOperations;
