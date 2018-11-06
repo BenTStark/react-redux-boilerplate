@@ -1,4 +1,4 @@
-import types from "./types.js";
+import types from "./types";
 
 const initalState = {
   profile: null,
@@ -12,7 +12,7 @@ function loginRequest(state) {
   return { ...state, loginRequest: true };
 }
 
-function loginSuccess(state, credentials) {
+function loginSuccess(state, authInformation) {
   return {
     ...state,
     profile: authInformation.profile,
@@ -41,9 +41,9 @@ const authReducer = (state = initalState, action) => {
     case types.LOGIN_REQUEST:
       return loginRequest(state);
     case types.LOGIN_SUCCESS:
-      return loginRequest(state,action.payload.authInformation);
+      return loginSuccess(state,action.payload);
     case types.LOGIN_ERROR:
-      return loginRequest(state);
+      return loginError(state);
     case types.LOGOUT:
         return logout(state);
     default:

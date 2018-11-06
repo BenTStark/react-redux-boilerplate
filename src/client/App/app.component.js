@@ -32,8 +32,13 @@ export class AppComponent extends Component {
         }
         AuthService.setToken(authResult.idToken, authResult.accessToken); // static method
         AuthService.setProfile(profile); // static method
-        this.props.loginSuccess(profile, authResult.accessToken);
-        this.props.push("/");
+
+        const authInformation = {};
+        authInformation.profile = profile;
+        authInformation.accessToken = authResult.accessToken;
+
+        this.props.loginSuccess(authInformation);
+        this.props.go("/");
         AuthService.lock.hide();
       });
     });
@@ -41,7 +46,7 @@ export class AppComponent extends Component {
     AuthService.lock.on("authorization_error", error => {
       //this.props.loginError(error);
       this.props.loginError();
-      this.props.push("/");
+      //this.props.push("/");
     });
   }
 
@@ -55,7 +60,7 @@ export class AppComponent extends Component {
     //event.preventDefault();
     this.props.logout();
     AuthService.logout(); // careful, this is a static method
-    this.props.push("/");
+    //this.props.push("/");
   };
 
   render() {

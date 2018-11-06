@@ -12,7 +12,7 @@ export default () => {
         <Route path="/callback" render={() => <div>Callback</div>} />
         <Route path="/test" component={NotFoundComponent} />
         {/* Catch all route */}
-        <Route component={NotFoundComponent} status={404} />
+        {/*<Route component={NotFoundComponent} status={404} />*/}
       </Switch>
     </div>
   );

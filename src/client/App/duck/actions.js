@@ -1,4 +1,4 @@
-import types from "./index";
+import types from "./types";
 
 const loginRequest = () => {
   return { type: types.LOGIN_REQUEST };

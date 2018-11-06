@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
-import { push } from "connected-react-router";
+import { go } from "connected-react-router";
 import AppComponent from "./app.component";
-import { AppOperations } from "./duck/index";
+import { AppOperations } from "./duck/operations";
 
 //import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 //import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
@@ -39,14 +39,14 @@ const mapDispatchToProps = dispatch => {
     dispatch(AppOperations.loginSuccess(authInformation));
   const loginError = () => dispatch(AppOperations.loginError());
   const logout = () => dispatch(AppOperations.logout());
-  const push = pathname => dispatch(push(pathname));
+  const go = pathname => dispatch(go(pathname));
 
   return {
     loginRequest,
     loginSuccess,
     loginError,
     logout,
-    push
+    go
   };
 };
 

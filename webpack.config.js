@@ -54,7 +54,8 @@ const server = {
     filename: "[name].js",
     path: path.resolve(__dirname, "dist")
   },
-  module: moduleObj,
+  //module: moduleObj,
   externals: [nodeExternals()]
 };
 module.exports = [client, server];
+//module.exports = client;
