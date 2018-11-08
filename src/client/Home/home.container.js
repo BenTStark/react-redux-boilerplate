@@ -1,22 +1,11 @@
-import { connect } from 'react-redux';
-import HomeComponent from './home.component';
-import { homeOperations } from './duck';
+import { connect } from "react-redux";
+import HomeComponent from "./home.component";
+import { homeOperations } from "./duck";
 
 const mapStateToProps = state => {
-  const { auth } = state.authReducer;
-  return { auth }
+  return { auth: state.authReducer };
 };
 
-// const mapDispatchToProps = dispatch => {
-//   const defaultOperation = () => dispatch(homeOperations.defaultOperation()));
-//
-//   return {
-//     defaultOperation
-//   }
-// };
-
-const HomeContainer = connect(
-  mapStateToProps
-)(HomeComponent);
+const HomeContainer = connect(mapStateToProps)(HomeComponent);
 
 export default HomeContainer;

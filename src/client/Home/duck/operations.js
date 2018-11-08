@@ -1,9 +1,21 @@
 // optional for API requests
 //import axios from 'axios';
-import Creators from './actions';
+import Creators from "./actions";
 
-const defaultAction = Creators.defaultAction;
+const getPost = Creators.getPost(getPostAsnyc);
 
+const getPostAsnyc = () => {
+  const requestOptions = {
+    method: "get",
+    url: "https://localhost:1337/post"
+  };
+
+  const request = axios(requestOptions).then(response => {
+    return { response: response, options: requestOptions };
+  });
+
+  return { payload: request };
+};
 // const defaultOperation = () => {
 //   return dispatch => {
 //
@@ -40,5 +52,5 @@ const defaultAction = Creators.defaultAction;
 
 export default {
   defaultAction
-//  defaultOperation
-}
+  //  defaultOperation
+};

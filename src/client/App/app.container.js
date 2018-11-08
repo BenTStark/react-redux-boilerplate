@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { go } from "connected-react-router";
+import { push } from "connected-react-router";
 import AppComponent from "./app.component";
 import { AppOperations } from "./duck/operations";
 
@@ -39,14 +39,14 @@ const mapDispatchToProps = dispatch => {
     dispatch(AppOperations.loginSuccess(authInformation));
   const loginError = () => dispatch(AppOperations.loginError());
   const logout = () => dispatch(AppOperations.logout());
-  const go = pathname => dispatch(go(pathname));
+  const pushHistory = pathname => dispatch(push(pathname));
 
   return {
     loginRequest,
     loginSuccess,
     loginError,
     logout,
-    go
+    pushHistory
   };
 };
 

@@ -1,44 +1,37 @@
 import React, { Component, PropTypes } from "react";
-//import { IndexLink } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import Navbar from "react-bootstrap/lib/Navbar";
 import Nav from "react-bootstrap/lib/Nav";
 import NavItem from "react-bootstrap/lib/NavItem";
-//import Helmet from 'react-helmet';
-import * as AuthService from "./duck/auth";
-// Ein Element aus der erikras repo
-//import { InfoBar } from 'components';
+import AuthService from "./duck/auth";
 import getRoutes from "../routes";
 
 export class AppComponent extends Component {
-  // static propTypes = {
-  //   //children: PropTypes.object.isRequired,
-  //   profile: PropTypes.object
-  //   //accessToken: PropTypes.object
-  //   //logout: PropTypes.func.isRequired,
-  //   //pushState: PropTypes.func.isRequired
-  // };
-
-  // static contextTypes = {
-  //   store: PropTypes.object.isRequired
-  // };
   componentWillMount() {
+    const authInformation = {};
+    // Check for credentials in window.localStorage
+    if (AuthService.loggedIn()) {
+      authInformation.profile = AuthService.getProfile();
+      authInformation.accessToken = AuthService.getAccessToken();
+
+      this.props.loginSuccess(authInformation);
+    }
+
     // Add callback for lock's `authenticated` event
     AuthService.lock.on("authenticated", authResult => {
+      console.log(authResult);
       AuthService.lock.getUserInfo(authResult.accessToken, (error, profile) => {
         if (error) {
-          //return this.props.loginError(error);
           return this.props.loginError();
         }
         AuthService.setToken(authResult.idToken, authResult.accessToken); // static method
         AuthService.setProfile(profile); // static method
 
-        const authInformation = {};
         authInformation.profile = profile;
         authInformation.accessToken = authResult.accessToken;
 
         this.props.loginSuccess(authInformation);
-        this.props.go("/");
+        this.props.pushHistory("/");
         AuthService.lock.hide();
       });
     });
@@ -46,7 +39,7 @@ export class AppComponent extends Component {
     AuthService.lock.on("authorization_error", error => {
       //this.props.loginError(error);
       this.props.loginError();
-      //this.props.push("/");
+      this.props.pushHistory("/");
     });
   }
 
@@ -60,17 +53,14 @@ export class AppComponent extends Component {
     //event.preventDefault();
     this.props.logout();
     AuthService.logout(); // careful, this is a static method
-    //this.props.push("/");
+    this.props.pushHistory("/");
   };
 
   render() {
-    //const {user} = this.props;
     const styles = require("./app.scss");
 
     return (
       <div className={styles.app}>
-        {/* tbd: sieht nützlich aus, aber muss ich erst noch verstehen
-          <Helmet {...config.app.head}/>*/}
         <Navbar fixedTop>
           <Navbar.Header>
             <Navbar.Brand>
@@ -122,31 +112,3 @@ export class AppComponent extends Component {
 }
 
 export default AppComponent;
-
-// {user && (
-//   <LinkContainer to="/chat">
-//     <NavItem eventKey={1}>Chat</NavItem>
-//   </LinkContainer>
-// )}
-// <LinkContainer to="/about">
-//    <NavItem eventKey={5}>About Us</NavItem>
-// </LinkContainer>
-
-// {!this.props.auth.loginSuccess && <LinkContainer>// /*to="/login"*/>
-//     <NavItem eventKey={6} onClick={this.handleLogin}>
-//       Login
-//     </NavItem>
-//   </LinkContainer>
-// }
-
-// {this.props.auth.loginSuccess &&
-//   <LinkContainer to="/">
-//     <NavItem
-//       eventKey={7}
-//       className="logout-link"
-//       onClick={this.handleLogout}
-//     >
-//       Logout
-//     </NavItem>
-//   </LinkContainer>
-// }
