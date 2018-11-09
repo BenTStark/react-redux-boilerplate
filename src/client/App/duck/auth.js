@@ -96,7 +96,7 @@ const isTokenExpired = () => {
   return !(date.valueOf() > new Date().valueOf() + offsetSeconds * 1000);
 };
 
-export const AuthService = {
+const AuthService = {
   lock,
   login,
   logout,
@@ -107,3 +107,5 @@ export const AuthService = {
   getToken,
   getAccessToken
 };
+
+export default AuthService;

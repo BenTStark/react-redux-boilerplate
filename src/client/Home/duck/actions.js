@@ -1,12 +1,20 @@
-import types from "./types.js";
+import homeTypes from "./types";
 
-const defaultAction = value => {
+const getObj = getObjAsnyc => {
+  console.log("action");
+  console.log(types);
+  console.log(getObjAsnyc);
   return {
-    type: types.DEFAULT_ACTION,
-    value: value
+    type: types.GET_OBJECT,
+    payload: getObjAsnyc
   };
 };
 
+const testAction = () => {
+  return { type: types.TEST_ACTION };
+};
+
 export default {
-  defaultAction
+  getObj,
+  testAction
 };

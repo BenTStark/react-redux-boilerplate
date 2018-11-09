@@ -1,11 +1,19 @@
 import React, { Component } from "react";
 
 export class HomeComponent extends Component {
+  componentWillMount() {
+    console.log("cwm");
+    console.log(this.props);
+  }
   render() {
     return (
       <div>
-        <p>State</p>
+        <p>Auth State</p>
         <pre>{JSON.stringify(this.props.auth, null, 2)}</pre>
+        <p>Home State</p>
+        <button onClick={() => this.props.testAction()}>Test Action</button>
+        <button onClick={() => this.props.getObj()}>Test Axios</button>
+        <pre>{JSON.stringify(this.props.home, null, 2)}</pre>
         <p>Local Storage</p>
         <pre>{JSON.stringify(window.localStorage, null, 2)}</pre>
       </div>
