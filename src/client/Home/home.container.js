@@ -1,14 +1,19 @@
 import { connect } from "react-redux";
 import HomeComponent from "./home.component";
 import { HomeOperations } from "./duck/operations";
+import axios from "axios";
 
 const mapStateToProps = state => {
   return { auth: state.authReducer, home: state.homeReducer };
 };
 
 const mapDispatchToProps = dispatch => {
-  const getObj = () => dispatch(HomeOperations.getObj());
   const testAction = () => dispatch(HomeOperations.testAction());
+  const getObj = () =>
+    axios.get(HomeOperations.getDataUrl).then(response => {
+      dispatch(HomeOperations.getObj(response));
+    });
+
   return {
     getObj,
     testAction

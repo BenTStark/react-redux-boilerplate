@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 
 export class HomeComponent extends Component {
-  componentWillMount() {
-    console.log("cwm");
-    console.log(this.props);
-  }
+
   render() {
     return (
       <div>

@@ -1,9 +1,6 @@
-import homeTypes from "./types";
+import types from "./types";
 
 const getObj = getObjAsnyc => {
-  console.log("action");
-  console.log(types);
-  console.log(getObjAsnyc);
   return {
     type: types.GET_OBJECT,
     payload: getObjAsnyc

@@ -20,12 +20,10 @@ function testAction(state) {
 }
 
 const homeReducer = (state = initalState, action) => {
-  console.log("reducer");
-  console.log(action);
   switch (action.type) {
     case types.GET_OBJECT:
       return getObj(state, action.payload);
-    case types.TEST_ACTIONS:
+    case types.TEST_ACTION:
       return testAction(state);
     default:
       return state;

@@ -1,33 +1,14 @@
-// optional for API requests
-import axios from "axios";
 import Creators from "./actions";
 
-const getObjAsnyc = () => {
-  console.log("async");
-  const requestOptions = {
-    method: "get",
-    url: "https://mirrorpi.ddns.net/api"
-  };
+// URLs for API us are build here, but used in container!
+const getDataUrl = "https://mirrorpi.ddns.net/api";
 
-  const request = axios(requestOptions).then(response => {
-    console.log(requestOptions);
-    console.log(response);
-    return { response: response, options: requestOptions };
-  });
+const getObj = objAsync => Creators.getObj(objAsync);
 
-  return { payload: request };
-};
-
-const getObj = () => {
-  console.log("opertions");
-  Creators.getObj(getObjAsnyc());
-};
-
-const testAction = () => {
-  Creators.testAction();
-};
+const testAction = () => Creators.testAction();
 
 export const HomeOperations = {
   getObj,
+  getDataUrl,
   testAction
 };

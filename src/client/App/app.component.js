@@ -13,13 +13,11 @@ export class AppComponent extends Component {
     if (AuthService.loggedIn()) {
       authInformation.profile = AuthService.getProfile();
       authInformation.accessToken = AuthService.getAccessToken();
-
       this.props.loginSuccess(authInformation);
     }
 
     // Add callback for lock's `authenticated` event
     AuthService.lock.on("authenticated", authResult => {
-      console.log(authResult);
       AuthService.lock.getUserInfo(authResult.accessToken, (error, profile) => {
         if (error) {
           return this.props.loginError();
