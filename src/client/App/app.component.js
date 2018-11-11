@@ -3,7 +3,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import Navbar from "react-bootstrap/lib/Navbar";
 import Nav from "react-bootstrap/lib/Nav";
 import NavItem from "react-bootstrap/lib/NavItem";
-import AuthService from "./duck/auth";
+import AuthService from "./duck/auth.service";
 import getRoutes from "../routes";
 
 export class AppComponent extends Component {
@@ -79,11 +79,8 @@ export class AppComponent extends Component {
               {this.props.auth.loginSuccess && (
                 <NavItem onClick={this.handleLogout}>Logout</NavItem>
               )}
-              <LinkContainer to="/callback">
-                <NavItem>Callback</NavItem>
-              </LinkContainer>
-              <LinkContainer to="/test">
-                <NavItem>Test</NavItem>
+              <LinkContainer to="/otherRoute">
+                <NavItem>Other Route</NavItem>
               </LinkContainer>
             </Nav>
             {this.props.auth.loginSuccess && (

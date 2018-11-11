@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import authReducer from "./App/duck/index";
-import homeReducer from './Home/duck/index';
+import authReducer from "./App/duck/reducer";
+import homeReducer from './Home/duck/reducer';
 import { connectRouter } from "connected-react-router";
 
 const reducer = history =>
