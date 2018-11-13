@@ -5,7 +5,9 @@ exports[`>>> HomeComponent - Snapshot +++capturing Snapshot of HomeComponent 1`]
   <p>
     Auth State
   </p>
-  <pre />
+  <pre>
+    {}
+  </pre>
   <p>
     Home State
   </p>
@@ -15,11 +17,14 @@ exports[`>>> HomeComponent - Snapshot +++capturing Snapshot of HomeComponent 1`]
     Test Action
   </button>
   <button
+    id="axios"
     onClick={[Function]}
   >
     Test Axios
   </button>
-  <pre />
+  <pre>
+    {}
+  </pre>
   <p>
     Local Storage
   </p>

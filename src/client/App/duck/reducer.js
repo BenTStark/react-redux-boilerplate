@@ -29,7 +29,7 @@ function loginError(state) {
 function logout(state) {
   return {
     ...state,
-    user: null,
+    profile: null,
     accessToken: null,
     loginRequest: false,
     loginSuccess: false

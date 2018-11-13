@@ -14,8 +14,6 @@ export default function configureStore(history, initialState = {}) {
     window.devToolsExtension ? window.devToolsExtension() : f => f
   );
 
-  // Sync dispatched route actions to the history
-
   const store = createStore(reducer(history), initialState, enhancer);
 
   // if (module.hot) {

@@ -11,7 +11,7 @@ const mapDispatchToProps = dispatch => {
   const testAction = () => dispatch(HomeOperations.testAction());
   const getObj = () =>
     axios.get(HomeOperations.getDataUrl).then(response => {
-      dispatch(HomeOperations.getObj(response));
+      dispatch(HomeOperations.getObj(response.data));
     });
 
   return {

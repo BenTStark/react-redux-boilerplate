@@ -5,8 +5,9 @@ import Nav from "react-bootstrap/lib/Nav";
 import NavItem from "react-bootstrap/lib/NavItem";
 import AuthService from "./duck/auth.service";
 import getRoutes from "../routes";
+import styles from "./app.scss";
 
-export class AppComponent extends Component {
+export default class AppComponent extends Component {
   componentWillMount() {
     const authInformation = {};
     // Check for credentials in window.localStorage
@@ -55,15 +56,13 @@ export class AppComponent extends Component {
   };
 
   render() {
-    const styles = require("./app.scss");
-
     return (
       <div className={styles.app}>
         <Navbar fixedTop>
           <Navbar.Header>
             <Navbar.Brand>
               <LinkContainer to="/" activeStyle={{ color: "#ffffff" }}>
-                <div className={styles.brand}>
+                <div>
                   <span>React-Redux-Boilerplate</span>
                 </div>
               </LinkContainer>
@@ -84,7 +83,7 @@ export class AppComponent extends Component {
               </LinkContainer>
             </Nav>
             {this.props.auth.loginSuccess && (
-              <p className={styles.loggedInMessage + " navbar-text"}>
+              <p className="navbar-text">
                 Logged in as <strong>{this.props.auth.profile.nickname}</strong>.
               </p>
             )}
@@ -105,5 +104,3 @@ export class AppComponent extends Component {
     );
   }
 }
-
-export default AppComponent;

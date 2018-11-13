@@ -1,6 +1,7 @@
 let path = require("path");
 let nodeExternals = require("webpack-node-externals");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+
 const moduleObj = {
   rules: [
     {
@@ -13,6 +14,7 @@ const moduleObj = {
     {
       test: /\.scss$/,
       use: [
+
         {
           loader: "style-loader" // creates style nodes from JS strings
         },
@@ -35,13 +37,19 @@ const client = {
     filename: "[name].js",
     path: path.resolve(__dirname, "dist/public")
   },
-  devtool: 'source-map',
-  mode: 'development',
+  devtool: "source-map",
+  mode: "development",
   module: moduleObj,
   plugins: [
     new HtmlWebPackPlugin({
       template: "src/client/index.html"
     })
+    // ,
+    // new webpack.DefinePlugin({
+    //   "process.env": {
+    //     NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+    //   }
+    // })
   ]
 };
 const server = {
@@ -49,7 +57,7 @@ const server = {
     server: "./src/server/index.js"
   },
   target: "node",
-  mode: 'development',
+  mode: "development",
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "dist")

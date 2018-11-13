@@ -1,26 +1,28 @@
-import React from "react";
-import { shallow, mount } from "enzyme";
-import renderer from "react-test-renderer";
 import HomeComponent from "./home.component";
 import HomeContainer from "./home.container";
+import { HomeOperations } from "./duck/operations";
+import types from "./duck/types";
+
+import React from "react";
+import { shallow } from "enzyme";
 import configureStore from "redux-mock-store";
-import { Provider } from "react-redux";
+import toJson from "enzyme-to-json";
+import axios from "axios";
+import MockAdapter from "axios-mock-adapter";
 
 // Snapshot for Home React Component
 describe(">>> HomeComponent - Snapshot", () => {
   it("+++capturing Snapshot of HomeComponent", () => {
-    const renderedValue = renderer.create(<HomeComponent />).toJSON();
-    expect(renderedValue).toMatchSnapshot();
+    const renderedValue = shallow(
+      <HomeComponent auth={{}} home={{}} />
+    );
+    expect(toJson(renderedValue)).toMatchSnapshot();
   });
 });
 
 // Component Test
 describe(">>> HomeComponent --- Shallow Render React Components", () => {
-  let wrapper;
-
-  beforeEach(() => {
-    wrapper = shallow(<HomeComponent />);
-  });
+  const wrapper = shallow(<HomeComponent auth={{}} home={{}} />);
 
   it("+++ render the COMPONENT", () => {
     expect(wrapper.length).toEqual(1);
@@ -30,62 +32,49 @@ describe(">>> HomeComponent --- Shallow Render React Components", () => {
 // Container Test
 describe(">>> HomeContainer --- REACT-REDUX (Shallow + passing the {store} directly)", () => {
   const initialState = {
-    payload: null,
-    test: false
+    authReducer: {
+      profile: null,
+      accessToken: null,
+      loginRequest: false,
+      loginSuccess: false,
+      loginError: false
+    },
+    homeReducer: {
+      payload: null,
+      test: false
+    }
   };
   const mockStore = configureStore();
-  let store, wrapper;
+  let store, container;
 
   beforeEach(() => {
     store = mockStore(initialState);
-    console.log(store.getState());
-    wrapper = mount(
-      <Provider store={store}>
-        <HomeContainer />
-      </Provider>
-    );
-  });
-
-  it("+++ render the connected(SMART) component", () => {
-    console.log(JSON.stringify(wrapper.find()));
-    expect(wrapper.find(HomeContainer).length).toEqual(1);
+    container = shallow(<HomeContainer store={store} />);
   });
 
   it("+++ check Prop matches with initialState", () => {
-    console.log(wrapper.find(HomeContainer).prop());
-    expect(wrapper.find(HomeComponent).prop("home")).toEqual(initialState);
+    expect(container.prop("home")).toEqual(initialState.homeReducer);
+    expect(container.prop("auth")).toEqual(initialState.authReducer);
   });
 
-  // it('+++ check action on dispatching ', () => {
-  //     let action
-  //     store.dispatch(addInputs(500))
-  //     store.dispatch(subtractInputs(100))
-  //     action = store.getActions()
-  //     expect(action[0].type).toBe("ADD_INPUTS")
-  //     expect(action[1].type).toBe("SUBTRACT_INPUTS")
-  // });
-});
+  describe(">>> Test Axios Request", () => {
+    const mockData = { response: "content" };
+    beforeEach(() => {
+      const mock = new MockAdapter(axios);
+      mock.onGet(HomeOperations.getDataUrl).reply(200, mockData);
+      container
+        .dive()
+        .find("#axios")
+        .simulate("click");
+    });
 
-//---------------------------
-// describe(">>> HomeContainer --- REACT-REDUX (Shallow + passing the {store} directly)", () => {
-//   const initialState = {
-//     payload: null,
-//     test: false
-//   };
-//   const mockStore = configureStore();
-//   let store, container;
-//
-//   beforeEach(() => {
-//     store = mockStore(initialState);
-//     container = shallow(<HomeContainer store={store} />);
-//   });
-//
-//   it("+++ render the CONTAINER", () => {
-//     expect(container.length).toEqual(1);
-//   });
-//
-//   it("+++ check Prop matches with initialState", () => {
-//     console.log(container.prop("home"));
-//     expect(container.prop("home")).toEqual(initialState);
-//   });
-// });
+    it("+++ Click Request Button", () => {
+      expect(store.getActions()).toEqual([
+        {
+          type: types.GET_OBJECT,
+          payload: mockData
+        }
+      ]);
+    });
+  });
+});
