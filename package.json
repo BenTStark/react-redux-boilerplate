@@ -4,7 +4,8 @@
   "description": "Basic React Redux Boilerplate",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development",
     "build-babel": "npm run build-babel-server && npm run build-babel-client",
     "build-babel-server": "babel src/server --out-dir ./dist",
     "build-babel-client": "babel src/client --copy-files --out-dir ./dist/public",
@@ -46,6 +47,7 @@
     "html-webpack-plugin": "^3.2.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^23.6.0",
+    "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.10.0",
     "react-addons-test-utils": "^15.6.2",
     "react-test-renderer": "^16.5.2",

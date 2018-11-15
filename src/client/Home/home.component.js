@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import { object } from "prop-types";
+import styles from "./home.scss";
 
 export default class HomeComponent extends Component {
-
   static propTypes = {
     auth: object.isRequired,
     home: object.isRequired
   };
+
   render() {
     return (
-      <div>
+      <div className={styles.base}>
         <p>Auth State</p>
         <pre>{JSON.stringify(this.props.auth, null, 2)}</pre>
         <p>Home State</p>

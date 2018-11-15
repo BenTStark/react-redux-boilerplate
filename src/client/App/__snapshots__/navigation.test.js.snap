@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`>>> NavigationComponent - Snapshot +++capturing Snapshot of NavigationComponent 1`] = `
+<div>
+  <Uncontrolled(Navbar)
+    bsStyle="default"
+    fixedTop={true}
+  >
+    <NavbarHeader>
+      <NavbarBrand>
+        <LinkContainer
+          activeClassName="active"
+          className="title"
+          exact={false}
+          replace={false}
+          strict={false}
+          to="/"
+        >
+          <div>
+            <span>
+              React-Redux-Boilerplate
+            </span>
+          </div>
+        </LinkContainer>
+      </NavbarBrand>
+      <NavbarToggle />
+    </NavbarHeader>
+    <NavbarCollapse>
+      <Nav
+        bsClass="nav"
+        justified={false}
+        navbar={true}
+        pullLeft={false}
+        pullRight={false}
+        stacked={false}
+      >
+        <NavItem
+          active={false}
+          disabled={false}
+          onClick={[Function]}
+        >
+          Logout
+        </NavItem>
+        <LinkContainer
+          activeClassName="active"
+          exact={false}
+          replace={false}
+          strict={false}
+          to="/otherRoute"
+        >
+          <NavItem
+            active={false}
+            disabled={false}
+          >
+            Other Route
+          </NavItem>
+        </LinkContainer>
+      </Nav>
+      <p
+        className="navbar-text"
+      >
+        Logged in as 
+        <strong>
+          John Doe
+        </strong>
+        .
+      </p>
+      <Nav
+        bsClass="nav"
+        justified={false}
+        navbar={true}
+        pullLeft={false}
+        pullRight={true}
+        stacked={false}
+      >
+        <NavItem
+          active={false}
+          disabled={false}
+          href="https://github.com/BenTStark/react-redux-boilerplate"
+          target="_blank"
+          title="View on Github"
+        >
+          <i
+            className="fa fa-github"
+          />
+        </NavItem>
+      </Nav>
+    </NavbarCollapse>
+  </Uncontrolled(Navbar)>
+</div>
+`;

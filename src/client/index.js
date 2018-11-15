@@ -5,7 +5,7 @@ import { createBrowserHistory } from "history";
 import { Provider } from "react-redux";
 import { ReduxAsyncConnect } from "redux-connect";
 import configureStore from "./configureStore";
-import AppContainer from "./App/app.container";
+import AppComponent from "./App/app.component";
 
 const history = createBrowserHistory();
 const store = configureStore(history);
@@ -16,7 +16,7 @@ const destination = document.getElementById("root");
 ReactDOM.render(
   <Provider store={store} key="provider">
     <ConnectedRouter history={history}>
-      <AppContainer />
+      <AppComponent />
     </ConnectedRouter>
   </Provider>,
   destination

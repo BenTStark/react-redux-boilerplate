@@ -1,35 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`>>> HomeComponent - Snapshot +++capturing Snapshot of HomeComponent 1`] = `
-<div>
-  <p>
-    Auth State
-  </p>
-  <pre>
-    {}
-  </pre>
-  <p>
-    Home State
-  </p>
-  <button
-    onClick={[Function]}
+<HomeComponent
+  auth={Object {}}
+  home={Object {}}
+>
+  <div
+    className="base"
   >
-    Test Action
-  </button>
-  <button
-    id="axios"
-    onClick={[Function]}
-  >
-    Test Axios
-  </button>
-  <pre>
-    {}
-  </pre>
-  <p>
-    Local Storage
-  </p>
-  <pre>
-    {}
-  </pre>
-</div>
+    <p>
+      Auth State
+    </p>
+    <pre>
+      {}
+    </pre>
+    <p>
+      Home State
+    </p>
+    <button
+      onClick={[Function]}
+    >
+      Test Action
+    </button>
+    <button
+      id="axios"
+      onClick={[Function]}
+    >
+      Test Axios
+    </button>
+    <pre>
+      {}
+    </pre>
+    <p>
+      Local Storage
+    </p>
+    <pre>
+      {}
+    </pre>
+  </div>
+</HomeComponent>
 `;

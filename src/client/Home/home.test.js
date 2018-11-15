@@ -4,7 +4,7 @@ import { HomeOperations } from "./duck/operations";
 import types from "./duck/types";
 
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import configureStore from "redux-mock-store";
 import toJson from "enzyme-to-json";
 import axios from "axios";
@@ -13,7 +13,7 @@ import MockAdapter from "axios-mock-adapter";
 // Snapshot for Home React Component
 describe(">>> HomeComponent - Snapshot", () => {
   it("+++capturing Snapshot of HomeComponent", () => {
-    const renderedValue = shallow(
+    const renderedValue = mount(
       <HomeComponent auth={{}} home={{}} />
     );
     expect(toJson(renderedValue)).toMatchSnapshot();

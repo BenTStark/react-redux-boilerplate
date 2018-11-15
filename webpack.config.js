@@ -1,5 +1,5 @@
-let path = require("path");
-let nodeExternals = require("webpack-node-externals");
+const path = require("path");
+const nodeExternals = require("webpack-node-externals");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 const moduleObj = {
@@ -12,17 +12,26 @@ const moduleObj = {
       }
     },
     {
-      test: /\.scss$/,
+      test: /\.(scss|css)$/,
       use: [
-
+        // "style-loader",
+        // MiniCssExtractPlugin.loader,
+        // "css-loader",
+        // "sass-loader"
         {
           loader: "style-loader" // creates style nodes from JS strings
         },
         {
-          loader: "css-loader" // translates CSS into CommonJS
+          loader: "css-loader", // translates CSS into CommonJS
+          options: {
+            sourceMap: true,
+            modules: true,
+            localIdentName: "[name]__[local]___[hash:base64:5]"
+          }
         },
         {
-          loader: "sass-loader" // compiles Sass to CSS
+          loader: "sass-loader", // compiles Sass to CSS
+          options: { sourceMap: true }
         }
       ]
     }
@@ -44,12 +53,6 @@ const client = {
     new HtmlWebPackPlugin({
       template: "src/client/index.html"
     })
-    // ,
-    // new webpack.DefinePlugin({
-    //   "process.env": {
-    //     NODE_ENV: JSON.stringify(process.env.NODE_ENV)
-    //   }
-    // })
   ]
 };
 const server = {
@@ -66,4 +69,3 @@ const server = {
   externals: [nodeExternals()]
 };
 module.exports = [client, server];
-//module.exports = client;
