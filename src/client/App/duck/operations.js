@@ -1,12 +1,12 @@
 // optional for API requests
-import Creators from "./actions";
+import ActionCreators from "./actions";
 import AuthService from "./auth.service";
 import types from "./types";
 
-const loginRequest = () => Creators.loginRequest();
-const loginSuccess = authInformation => Creators.loginSuccess(authInformation);
-const loginError = () => Creators.loginError();
-const logout = () => Creators.logout();
+const loginRequest = () => ActionCreators.loginRequest();
+const loginSuccess = authInformation => ActionCreators.loginSuccess(authInformation);
+const loginError = () => ActionCreators.loginError();
+const logout = () => ActionCreators.logout();
 
 const checkLogin = () => {
   return new Promise((resolve, reject) => {

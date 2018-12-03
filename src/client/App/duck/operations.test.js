@@ -18,7 +18,7 @@ describe(">>> App - Operations Test", () => {
     });
   });
 
-  it("+++ checkLogin When logged in", () => {
+  it("+++ checkLogin - When logged in", () => {
     return AppOperations.checkLogin().then(response => {
       expect(response).toBeDefined();
       expect(response.result).toEqual(types.LOGIN_SUCCESS);

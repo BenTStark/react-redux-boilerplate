@@ -19,6 +19,8 @@ export default class HomeComponent extends Component {
           Test Axios
         </button>
         <pre>{JSON.stringify(this.props.home, null, 2)}</pre>
+        <p>Contact State</p>
+        <pre>{JSON.stringify(this.props.contact, null, 2)}</pre>
         <p>Local Storage</p>
         <pre>{JSON.stringify(window.localStorage, null, 2)}</pre>
       </div>

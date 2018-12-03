@@ -72,6 +72,12 @@ export default class NavigationComponent extends Component {
               <LinkContainer to="/otherRoute">
                 <NavItem>Other Route</NavItem>
               </LinkContainer>
+              <LinkContainer to="/blog">
+                <NavItem>Blog</NavItem>
+              </LinkContainer>
+              <LinkContainer to="/contact">
+                <NavItem>Contact</NavItem>
+              </LinkContainer>
             </Nav>
             {this.props.auth.loginSuccess && (
               <p className="navbar-text">

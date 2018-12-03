@@ -4,7 +4,7 @@ import { HomeOperations } from "./duck/operations";
 import axios from "axios";
 
 const mapStateToProps = state => {
-  return { auth: state.authReducer, home: state.homeReducer };
+  return { auth: state.authReducer, home: state.homeReducer, contact: state.contactReducer  };
 };
 
 const mapDispatchToProps = dispatch => {

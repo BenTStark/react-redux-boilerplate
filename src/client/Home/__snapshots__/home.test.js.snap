@@ -32,6 +32,10 @@ exports[`>>> HomeComponent - Snapshot +++capturing Snapshot of HomeComponent 1`]
       {}
     </pre>
     <p>
+      Contact State
+    </p>
+    <pre />
+    <p>
       Local Storage
     </p>
     <pre>

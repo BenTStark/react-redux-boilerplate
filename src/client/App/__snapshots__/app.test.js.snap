@@ -17,6 +17,14 @@ exports[`>>> AppComponent - Snapshot +++capturing Snapshot of AppComponent 1`] =
         render={[Function]}
       />
       <Route
+        component={[Function]}
+        path="/blog"
+      />
+      <Route
+        component={[Function]}
+        path="/contact"
+      />
+      <Route
         path="/callback"
         render={[Function]}
       />

@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`>>> BlogComponent - Snapshot +++capturing Snapshot of BlogComponent 1`] = `
+<BlogComponent
+  blog={
+    Object {
+      "byHash": Object {
+        "1": Object {
+          "author": "author",
+          "createdAt": "1970.01.01",
+          "editMode": false,
+          "modifiedAt": "1970.01.01",
+          "text": "text",
+          "title": "title",
+        },
+      },
+      "byId": Array [
+        1,
+      ],
+    }
+  }
+  getBlogArticles={
+    [MockFunction] {
+      "calls": Array [
+        Array [],
+        Array [],
+      ],
+      "results": Array [
+        Object {
+          "isThrow": false,
+          "value": Array [
+            Object {
+              "author": "author",
+              "createdAt": "1970-01-01",
+              "id": 2,
+              "modifiedAt": "1970-01-01",
+              "text": "text",
+              "title": "title",
+            },
+          ],
+        },
+        Object {
+          "isThrow": false,
+          "value": Array [
+            Object {
+              "author": "author",
+              "createdAt": "1970-01-01",
+              "id": 2,
+              "modifiedAt": "1970-01-01",
+              "text": "text",
+              "title": "title",
+            },
+          ],
+        },
+      ],
+    }
+  }
+>
+  <div
+    className="blog"
+  >
+    <div>
+      <h1>
+        Blog
+      </h1>
+      <button
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Add
+      </button>
+      <button
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Test
+      </button>
+      <div
+        key="1"
+      >
+        <div>
+          <h2>
+            title
+          </h2>
+          <span>
+            by 
+            author
+          </span>
+          <button
+            disabled={false}
+            onClick={[Function]}
+            type="button"
+          >
+            Edit
+          </button>
+          <ReactMarkdown
+            astPlugins={Array []}
+            escapeHtml={true}
+            plugins={Array []}
+            rawSourcePos={false}
+            renderers={Object {}}
+            skipHtml={false}
+            source="text"
+            sourcePos={false}
+            transformLinkUri={[Function]}
+          >
+            <Root
+              key="root-1-1"
+            >
+              <p
+                key="paragraph-1-1"
+              >
+                <TextRenderer
+                  key="text-1-1"
+                  nodeKey="text-1-1"
+                  value="text"
+                >
+                  text
+                </TextRenderer>
+              </p>
+            </Root>
+          </ReactMarkdown>
+        </div>
+      </div>
+    </div>
+  </div>
+</BlogComponent>
+`;

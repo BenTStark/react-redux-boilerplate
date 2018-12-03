@@ -1,0 +1,245 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`>>> ContactComponent - Snapshot +++capturing Snapshot of ContactComponent 1`] = `
+<ContactComponent>
+  <div>
+    <ContactFormComponent
+      name="BenTStark"
+      onSubmit={[Function]}
+    >
+      <div>
+        <div>
+          hallo 
+          BenTStark
+          . hier sind die Props: 
+          {
+    "name": "BenTStark"
+}
+        </div>
+        <ReactFinalForm
+          onSubmit={[Function]}
+          render={[Function]}
+        >
+          <form
+            onSubmit={[Function]}
+          >
+            <div>
+              <label
+                htmlFor="firstName"
+              >
+                Vorname
+              </label>
+              <_class
+                component="input"
+                name="firstName"
+                type="text"
+              >
+                <Field
+                  component="input"
+                  format={[Function]}
+                  name="firstName"
+                  parse={[Function]}
+                  reactFinalForm={
+                    Object {
+                      "batch": [Function],
+                      "blur": [Function],
+                      "change": [Function],
+                      "focus": [Function],
+                      "getFieldState": [Function],
+                      "getRegisteredFields": [Function],
+                      "getState": [Function],
+                      "initialize": [Function],
+                      "isValidationPaused": [Function],
+                      "mutators": Object {},
+                      "pauseValidation": [Function],
+                      "registerField": [Function],
+                      "reset": [Function],
+                      "resumeValidation": [Function],
+                      "setConfig": [Function],
+                      "submit": [Function],
+                      "subscribe": [Function],
+                    }
+                  }
+                  type="text"
+                >
+                  <input
+                    name="firstName"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="text"
+                    value=""
+                  />
+                </Field>
+              </_class>
+            </div>
+            <div>
+              <label
+                htmlFor="lastName"
+              >
+                Nachname
+              </label>
+              <_class
+                component="input"
+                name="lastName"
+                type="text"
+              >
+                <Field
+                  component="input"
+                  format={[Function]}
+                  name="lastName"
+                  parse={[Function]}
+                  reactFinalForm={
+                    Object {
+                      "batch": [Function],
+                      "blur": [Function],
+                      "change": [Function],
+                      "focus": [Function],
+                      "getFieldState": [Function],
+                      "getRegisteredFields": [Function],
+                      "getState": [Function],
+                      "initialize": [Function],
+                      "isValidationPaused": [Function],
+                      "mutators": Object {},
+                      "pauseValidation": [Function],
+                      "registerField": [Function],
+                      "reset": [Function],
+                      "resumeValidation": [Function],
+                      "setConfig": [Function],
+                      "submit": [Function],
+                      "subscribe": [Function],
+                    }
+                  }
+                  type="text"
+                >
+                  <input
+                    name="lastName"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="text"
+                    value=""
+                  />
+                </Field>
+              </_class>
+            </div>
+            <div>
+              <label
+                htmlFor="email"
+              >
+                Email
+              </label>
+              <_class
+                component="input"
+                name="email"
+                type="email"
+              >
+                <Field
+                  component="input"
+                  format={[Function]}
+                  name="email"
+                  parse={[Function]}
+                  reactFinalForm={
+                    Object {
+                      "batch": [Function],
+                      "blur": [Function],
+                      "change": [Function],
+                      "focus": [Function],
+                      "getFieldState": [Function],
+                      "getRegisteredFields": [Function],
+                      "getState": [Function],
+                      "initialize": [Function],
+                      "isValidationPaused": [Function],
+                      "mutators": Object {},
+                      "pauseValidation": [Function],
+                      "registerField": [Function],
+                      "reset": [Function],
+                      "resumeValidation": [Function],
+                      "setConfig": [Function],
+                      "submit": [Function],
+                      "subscribe": [Function],
+                    }
+                  }
+                  type="email"
+                >
+                  <input
+                    name="email"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="email"
+                    value=""
+                  />
+                </Field>
+              </_class>
+            </div>
+            <div>
+              <label
+                htmlFor="message"
+              >
+                Nachricht
+              </label>
+              <_class
+                component="input"
+                name="message"
+                type="text"
+              >
+                <Field
+                  component="input"
+                  format={[Function]}
+                  name="message"
+                  parse={[Function]}
+                  reactFinalForm={
+                    Object {
+                      "batch": [Function],
+                      "blur": [Function],
+                      "change": [Function],
+                      "focus": [Function],
+                      "getFieldState": [Function],
+                      "getRegisteredFields": [Function],
+                      "getState": [Function],
+                      "initialize": [Function],
+                      "isValidationPaused": [Function],
+                      "mutators": Object {},
+                      "pauseValidation": [Function],
+                      "registerField": [Function],
+                      "reset": [Function],
+                      "resumeValidation": [Function],
+                      "setConfig": [Function],
+                      "submit": [Function],
+                      "subscribe": [Function],
+                    }
+                  }
+                  type="text"
+                >
+                  <input
+                    name="message"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="text"
+                    value=""
+                  />
+                </Field>
+              </_class>
+            </div>
+            <button
+              disabled={true}
+              type="submit"
+            >
+              Submit
+            </button>
+            <button
+              disabled={true}
+              onClick={[Function]}
+              type="button"
+            >
+              Clear Values
+            </button>
+          </form>
+        </ReactFinalForm>
+      </div>
+    </ContactFormComponent>
+  </div>
+</ContactComponent>
+`;

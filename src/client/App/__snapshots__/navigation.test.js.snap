@@ -55,6 +55,34 @@ exports[`>>> NavigationComponent - Snapshot +++capturing Snapshot of NavigationC
             Other Route
           </NavItem>
         </LinkContainer>
+        <LinkContainer
+          activeClassName="active"
+          exact={false}
+          replace={false}
+          strict={false}
+          to="/blog"
+        >
+          <NavItem
+            active={false}
+            disabled={false}
+          >
+            Blog
+          </NavItem>
+        </LinkContainer>
+        <LinkContainer
+          activeClassName="active"
+          exact={false}
+          replace={false}
+          strict={false}
+          to="/contact"
+        >
+          <NavItem
+            active={false}
+            disabled={false}
+          >
+            Contact
+          </NavItem>
+        </LinkContainer>
       </Nav>
       <p
         className="navbar-text"

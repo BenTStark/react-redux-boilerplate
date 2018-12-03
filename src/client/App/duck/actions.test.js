@@ -1,9 +1,9 @@
-import Creators from "./actions";
+import ActionCreators from "./actions";
 import types from "./types";
 
 describe(">>> App - Action Test", () => {
   it("+++ loginRequest", () => {
-    expect(Creators.loginRequest()).toEqual({ type: types.LOGIN_REQUEST });
+    expect(ActionCreators.loginRequest()).toEqual({ type: types.LOGIN_REQUEST });
   });
 
   it("+++ loginSuccess", () => {
@@ -11,17 +11,17 @@ describe(">>> App - Action Test", () => {
       profile: null,
       accessToken: null
     };
-    expect(Creators.loginSuccess(authInformation)).toEqual({
+    expect(ActionCreators.loginSuccess(authInformation)).toEqual({
       type: types.LOGIN_SUCCESS,
       payload: authInformation
     });
   });
 
   it("+++ loginError", () => {
-    expect(Creators.loginError()).toEqual({ type: types.LOGIN_ERROR });
+    expect(ActionCreators.loginError()).toEqual({ type: types.LOGIN_ERROR });
   });
 
   it("+++ logout", () => {
-    expect(Creators.logout()).toEqual({ type: types.LOGOUT });
+    expect(ActionCreators.logout()).toEqual({ type: types.LOGOUT });
   });
 });
