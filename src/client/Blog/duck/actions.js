@@ -60,13 +60,6 @@ const updateBlogArticle = (articleId, article) => {
   };
 };
 
-const updateEditorState = editorState => {
-  return {
-    type: types.UPDATE_EDITOR_STATE,
-    payload: editorState
-  };
-};
-
 export default {
   getBlogArticles,
   createBlogArticle,
@@ -75,6 +68,5 @@ export default {
   clearCurrentArticle,
   editBlogArticle,
   finishEditBlogArticle,
-  updateBlogArticle,
-  updateEditorState
+  updateBlogArticle
 };

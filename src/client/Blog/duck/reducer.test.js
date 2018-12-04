@@ -1,6 +1,5 @@
 import blogReducer from "./reducer";
 import types from "./types";
-import { EditorState } from "draft-js";
 import moment from "moment";
 import _ from "lodash";
 
@@ -19,7 +18,6 @@ let article = {
 let initialStateBase = {
   byId: [],
   byHash: {},
-  editorState: EditorState.createEmpty(),
   currentArticle: {
     title: null,
     createdAt: null,
@@ -165,17 +163,6 @@ describe(">>>>>> Blog - Reducer Test", () => {
       type: types.UPDATE_BLOG_ARTICLE,
       articleId: article.id,
       article: _.omit(article, ["id"])
-    });
-    expect(state).toEqual(expectedState);
-  });
-
-  it("+++ reducer for UPDATE_EDITOR_STATE", () => {
-    let payload = EditorState.createEmpty();
-    let initalState = expectedStateBase;
-    let expectedState = { ...expectedStateBase, editorState: payload };
-    let state = blogReducer(initalState, {
-      type: types.UPDATE_EDITOR_STATE,
-      payload: payload
     });
     expect(state).toEqual(expectedState);
   });

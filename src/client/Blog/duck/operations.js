@@ -20,8 +20,6 @@ const finishEditBlogArticle = articleId =>
   ActionCreators.finishEditBlogArticle(articleId);
 const updateBlogArticle = (articleId, article) =>
   ActionCreators.updateBlogArticle(articleId, article);
-const updateEditorState = editorState =>
-  ActionCreators.updateEditorState(editorState);
 
 const buildEditorContent = article => {
   return [
@@ -88,7 +86,6 @@ export const BlogOperations = {
   editBlogArticle,
   finishEditBlogArticle,
   updateBlogArticle,
-  updateEditorState,
   buildEditorContent,
   buildArticleObject,
   maxId,

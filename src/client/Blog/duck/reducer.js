@@ -1,4 +1,3 @@
-import { EditorState } from "draft-js";
 import types from "./types";
 import _ from "lodash";
 import moment from "moment";
@@ -6,7 +5,6 @@ import moment from "moment";
 const initialState = {
   byId: [],
   byHash: {},
-  editorState: EditorState.createEmpty(),
   currentArticle: {
     title: null,
     createdAt: null,
@@ -73,7 +71,7 @@ function setCurrentArticle(state, article) {
 function clearCurrentArticle(state) {
   return {
     ...state,
-    currentArticle: state.currentArticle
+    currentArticle: initialState.currentArticle
   };
 }
 
@@ -113,13 +111,6 @@ function updateBlogArticle(state, articleId, article) {
   };
 }
 
-function updateEditorState(state, payload) {
-  return {
-    ...state,
-    editorState: payload
-  };
-}
-
 const blogReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.GET_BLOG_ARTICLES:
@@ -138,8 +129,6 @@ const blogReducer = (state = initialState, action) => {
       return finishEditBlogArticle(state, action.articleId);
     case types.UPDATE_BLOG_ARTICLE:
       return updateBlogArticle(state, action.articleId, action.article);
-    case types.UPDATE_EDITOR_STATE:
-      return updateEditorState(state, action.payload);
     default:
       return state;
   }

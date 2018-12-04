@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import { object } from "prop-types";
-import { Editor, EditorState, ContentState } from "draft-js";
+import { EditorState, ContentState } from "draft-js";
 import styles from "./blog.scss";
 import { BlogOperations } from "./duck/operations";
 import _ from "lodash";
 import moment from "moment";
 import Moment from "react-moment";
 import ReactMarkdown from "react-markdown";
+import BlogEditor from "./editor.component";
 
 export default class BlogComponent extends Component {
   constructor(props) {
     super();
-    this.state = { edit: false };
+    this.state = { edit: false, editorState: EditorState.createEmpty() };
   }
 
   componentWillMount() {
@@ -23,22 +24,29 @@ export default class BlogComponent extends Component {
   };
 
   handleEdit = articleId => {
+    // Set State
     this.setState({ edit: true });
-    this.props.editBlogArticle(articleId);
-    // in container start
-    this.props.setCurrentArticle(this.props.blog.byHash[articleId]);
-    this.props.updateEditorState(
-      EditorState.createWithContent(
+    this.setState({
+      editorState: EditorState.createWithContent(
         ContentState.createFromText(
           BlogOperations.buildEditorContent(this.props.blog.byHash[articleId])
         )
       )
-    );
-    //in container ende
+    });
+    // update Store
+    this.props.setCurrentArticle(this.props.blog.byHash[articleId]);
+    this.props.editBlogArticle(articleId);
   };
 
   handleAdd = () => {
-    this.props.createBlogArticle();
+    // update Store
+    let article = this.props.createBlogArticle();
+    // set state from updated Store!!!
+    this.setState({
+      editorState: EditorState.createWithContent(
+        ContentState.createFromText(BlogOperations.buildEditorContent(article))
+      )
+    });
   };
 
   handleSave = articleId => {
@@ -47,53 +55,56 @@ export default class BlogComponent extends Component {
     _.merge(
       article,
       BlogOperations.buildArticleObject(
-        this.props.blog.editorState.getCurrentContent().getPlainText()
+        this.state.editorState.getCurrentContent().getPlainText()
       )
     );
     // strapi CMS (with mySQL implementation) needs this format
     article.modifiedAt = moment(Date.now()).format("YYYY-MM-DD HH:mm:ss");
-    this.props.updateBlogArticle(articleId, article);
-    // Close Edit Mode
+    // Set State
     this.setState({ edit: false });
-    // in container start
-    this.props.finishEditBlogArticle(articleId);
-    this.props.clearCurrentArticle();
-    this.props.updateEditorState(EditorState.createEmpty());
-    //in container ende
+    this.setState({
+      editorState: EditorState.createEmpty()
+    });
+    // update Store
+    this.props.updateBlogArticle(articleId, article);
   };
 
   handleDelete = articleId => {
+    // Set State
     this.setState({ edit: false });
-    // in container start
-    this.props.finishEditBlogArticle(articleId);
-    this.props.clearCurrentArticle();
-    this.props.updateEditorState(EditorState.createEmpty());
-    // in container ende
+
     this.props.deleteBlogArticle(articleId);
   };
 
   handleCancel = articleId => {
+    // Set State
     this.setState({ edit: false });
-    //in container start
-    this.props.finishEditBlogArticle(articleId);
-    this.props.clearCurrentArticle();
-    // in container ende
+    this.setState({
+      editorState: EditorState.createEmpty()
+    });
+
     if (this.props.blog.byHash[articleId].isNew) {
       this.props.deleteBlogArticle(articleId);
+    } else {
+      this.props.finishEditBlogArticle(articleId);
     }
-    this.props.updateEditorState(EditorState.createEmpty());
   };
 
   handleOnChange = editorState => {
-    this.props.updateEditorState(editorState);
+    // Set State
+    this.setState({
+      editorState: editorState
+    });
+    // prepare parameter
     const article = this.props.blog.currentArticle;
     _.merge(
       article,
       BlogOperations.buildArticleObject(
-        this.props.blog.editorState.getCurrentContent().getPlainText()
+        editorState.getCurrentContent().getPlainText()
       )
     );
-    article.modifiedAt = Date.now();
+    article.modifiedAt = moment(Date.now()).format("YYYY-MM-DD HH:mm:ss");
+    // update Store
     this.props.setCurrentArticle(article);
   };
 
@@ -140,33 +151,27 @@ export default class BlogComponent extends Component {
                 {/*Show Editor*/}
                 {this.props.blog.byHash[articleId].editMode && (
                   <div>
-                    <div className={styles.row}>
-                      <div className={styles.col}>
-                        <Editor
-                          editorState={this.props.blog.editorState}
-                          onChange={this.handleOnChange}
-                        />
-                      </div>
-                      <div className={styles.col}>
-                        <h2>{this.props.blog.currentArticle.title}</h2>
-                        <span>by {this.props.blog.currentArticle.author}</span>
-                        <ReactMarkdown
-                          source={this.props.blog.currentArticle.text}
-                        />
-                      </div>
-                    </div>
+                    <BlogEditor
+                      editorState={this.state.editorState}
+                      onChange={this.handleOnChange}
+                      author={this.props.blog.currentArticle.author}
+                      title={this.props.blog.currentArticle.title}
+                      source={this.props.blog.currentArticle.text}
+                    />
                     <button
                       type="button"
                       onClick={() => this.handleSave(articleId)}
                     >
                       Save
                     </button>
-                    <button
-                      type="button"
-                      onClick={() => this.handleDelete(articleId)}
-                    >
-                      Delete
-                    </button>
+                    {!this.props.blog.byHash[articleId].isNew && (
+                      <button
+                        type="button"
+                        onClick={() => this.handleDelete(articleId)}
+                      >
+                        Delete
+                      </button>
+                    )}
                     <button
                       type="button"
                       onClick={() => this.handleCancel(articleId)}
@@ -182,3 +187,21 @@ export default class BlogComponent extends Component {
     );
   }
 }
+
+/*
+<div className={styles.row}>
+  <div className={styles.col}>
+    <Editor
+      editorState={this.props.blog.editorState}
+      onChange={this.handleOnChange}
+    />
+  </div>
+  <div className={styles.col}>
+    <h2>{this.props.blog.currentArticle.title}</h2>
+    <span>by {this.props.blog.currentArticle.author}</span>
+    <ReactMarkdown
+      source={this.props.blog.currentArticle.text}
+    />
+  </div>
+</div>
+*/

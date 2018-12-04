@@ -74,12 +74,4 @@ describe(">>> Blog - Action Test", () => {
       article: article.content
     });
   });
-
-  it("+++ updateEditorState", () => {
-    const editorState = "editorState";
-    expect(ActionCreators.updateEditorState(editorState)).toEqual({
-      type: types.UPDATE_EDITOR_STATE,
-      payload: editorState
-    });
-  });
 });
