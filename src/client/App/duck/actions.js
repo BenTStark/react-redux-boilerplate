@@ -23,9 +23,14 @@ const logout = () => {
   };
 };
 
+const toogleLoginMethod = () => {
+  return { type: types.TOGGLE_LOGIN_METHOD };
+};
+
 export default {
   loginRequest,
   loginSuccess,
   loginError,
-  logout
+  logout,
+  toogleLoginMethod
 };

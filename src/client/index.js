@@ -7,6 +7,9 @@ import { ReduxAsyncConnect } from "redux-connect";
 import configureStore from "./configureStore";
 import AppComponent from "./App/app.component";
 
+import "normalize.css/normalize.css";
+import "@blueprintjs/core/lib/css/blueprint.css";
+
 const history = createBrowserHistory();
 const store = configureStore(history);
 

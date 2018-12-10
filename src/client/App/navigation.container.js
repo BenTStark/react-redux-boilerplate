@@ -13,6 +13,7 @@ const mapDispatchToProps = dispatch => {
     dispatch(AppOperations.loginSuccess(authInformation));
   const loginError = () => dispatch(AppOperations.loginError());
   const logout = () => dispatch(AppOperations.logout());
+  const toogleLoginMethod = () => dispatch(AppOperations.toogleLoginMethod());
   const pushHistory = pathname => dispatch(push(pathname));
 
   return {
@@ -20,6 +21,7 @@ const mapDispatchToProps = dispatch => {
     loginSuccess,
     loginError,
     logout,
+    toogleLoginMethod,
     pushHistory
   };
 };

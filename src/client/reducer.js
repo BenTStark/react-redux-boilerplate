@@ -3,6 +3,7 @@ import authReducer from "./App/duck/reducer";
 import homeReducer from "./Home/duck/reducer";
 import contactReducer from "./Contact/duck/reducer";
 import blogReducer from "./Blog/duck/reducer";
+import calendarReducer from "./Contact/duck/reducer";
 import { connectRouter } from "connected-react-router";
 
 const reducer = history =>
@@ -11,6 +12,7 @@ const reducer = history =>
     homeReducer,
     contactReducer,
     blogReducer,
+    calendarReducer,
     router: connectRouter(history)
   });
 

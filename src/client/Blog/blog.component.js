@@ -8,6 +8,15 @@ import moment from "moment";
 import Moment from "react-moment";
 import ReactMarkdown from "react-markdown";
 import BlogEditor from "./editor.component";
+import {
+  Button,
+  Icon,
+  Popover,
+  Tooltip,
+  Position,
+  H1,
+  H2
+} from "@blueprintjs/core";
 
 export default class BlogComponent extends Component {
   constructor(props) {
@@ -112,21 +121,15 @@ export default class BlogComponent extends Component {
     return (
       <div className={styles.blog}>
         <div>
-          <h1>Blog</h1>
-          <button
-            type="button"
+          <H1>Blog</H1>
+          <CustomButton
             onClick={() => this.handleAdd()}
+            contentTooltip={<span>Neuer Blogartikel</span>}
+            positionTooltip={Position.RIGHT}
             disabled={this.state.edit}
-          >
-            Add
-          </button>
-          <button
-            type="button"
-            onClick={() => this.handleTest()}
-            disabled={this.state.edit}
-          >
-            Test
-          </button>
+            icon="add-to-artifact"
+            iconSize={24}
+          />
           {this.props.blog.byId
             .sort((a, b) => this.sortBlogArticle(a, b))
             .map(articleId => (
@@ -134,15 +137,19 @@ export default class BlogComponent extends Component {
                 {/*Show Blog article*/}
                 {!this.props.blog.byHash[articleId].editMode && (
                   <div>
-                    <h2>{this.props.blog.byHash[articleId].title}</h2>
+                    <H2>
+                      <CustomButton
+                        onClick={() => this.handleEdit(articleId)}
+                        contentTooltip={<span>Bearbeiten</span>}
+                        positionTooltip={Position.RIGHT}
+                        disabled={this.state.edit}
+                        icon="edit"
+                        iconSize={24}
+                      />
+                      {this.props.blog.byHash[articleId].title}
+                    </H2>
                     <span>by {this.props.blog.byHash[articleId].author}</span>
-                    <button
-                      type="button"
-                      onClick={() => this.handleEdit(articleId)}
-                      disabled={this.state.edit}
-                    >
-                      Edit
-                    </button>
+
                     <ReactMarkdown
                       source={this.props.blog.byHash[articleId].text}
                     />
@@ -158,26 +165,29 @@ export default class BlogComponent extends Component {
                       title={this.props.blog.currentArticle.title}
                       source={this.props.blog.currentArticle.text}
                     />
-                    <button
-                      type="button"
+                    <CustomButton
                       onClick={() => this.handleSave(articleId)}
-                    >
-                      Save
-                    </button>
-                    {!this.props.blog.byHash[articleId].isNew && (
-                      <button
-                        type="button"
-                        onClick={() => this.handleDelete(articleId)}
-                      >
-                        Delete
-                      </button>
-                    )}
-                    <button
-                      type="button"
+                      contentTooltip={<span>Speichern</span>}
+                      positionTooltip={Position.RIGHT}
+                      icon="tick"
+                      iconSize={24}
+                    />
+                    <CustomButton
                       onClick={() => this.handleCancel(articleId)}
-                    >
-                      Cancel
-                    </button>
+                      contentTooltip={<span>Abbrechen</span>}
+                      positionTooltip={Position.RIGHT}
+                      icon="cross"
+                      iconSize={24}
+                    />
+                    {!this.props.blog.byHash[articleId].isNew && (
+                      <CustomButton
+                        onClick={() => this.handleDelete(articleId)}
+                        contentTooltip={<span>Löschen</span>}
+                        positionTooltip={Position.RIGHT}
+                        icon="trash"
+                        iconSize={24}
+                      />
+                    )}
                   </div>
                 )}
               </div>
@@ -188,20 +198,23 @@ export default class BlogComponent extends Component {
   }
 }
 
-/*
-<div className={styles.row}>
-  <div className={styles.col}>
-    <Editor
-      editorState={this.props.blog.editorState}
-      onChange={this.handleOnChange}
-    />
-  </div>
-  <div className={styles.col}>
-    <h2>{this.props.blog.currentArticle.title}</h2>
-    <span>by {this.props.blog.currentArticle.author}</span>
-    <ReactMarkdown
-      source={this.props.blog.currentArticle.text}
-    />
-  </div>
-</div>
-*/
+function CustomButton({
+  onClick,
+  contentTooltip,
+  contentPopover,
+  positionPopover,
+  positionTooltip,
+  disabled = false,
+  icon,
+  iconSize = 16
+}) {
+  return (
+    <Popover content={contentPopover} position={positionPopover}>
+      <Tooltip content={contentTooltip} position={positionTooltip}>
+        <Button onClick={onClick} disabled={disabled}>
+          <Icon icon={icon} iconSize={iconSize} />
+        </Button>
+      </Tooltip>
+    </Popover>
+  );
+}

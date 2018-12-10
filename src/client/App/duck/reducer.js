@@ -5,7 +5,8 @@ const initalState = {
   accessToken: null,
   loginRequest: false,
   loginSuccess: false,
-  loginError: false
+  loginError: false,
+  useLock: true
 };
 
 function loginRequest(state) {
@@ -36,16 +37,22 @@ function logout(state) {
   };
 }
 
+function toogleLoginMethod(state) {
+  return { ...state, useLock: !state.useLock };
+}
+
 const authReducer = (state = initalState, action) => {
   switch (action.type) {
     case types.LOGIN_REQUEST:
       return loginRequest(state);
     case types.LOGIN_SUCCESS:
-      return loginSuccess(state,action.payload);
+      return loginSuccess(state, action.payload);
     case types.LOGIN_ERROR:
       return loginError(state);
     case types.LOGOUT:
-        return logout(state);
+      return logout(state);
+    case types.TOGGLE_LOGIN_METHOD:
+      return toogleLoginMethod(state);
     default:
       return state;
   }

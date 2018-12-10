@@ -1,5 +1,8 @@
 // File for necessary auth helper functions
+// For the use of Lock
 import Auth0Lock from "auth0-lock";
+// For Custom login Form
+import Auth0 from "auth0-js";
 import jwtDecode from "jwt-decode";
 
 import {
@@ -18,12 +21,49 @@ const lock = new Auth0Lock(authConfig.clientId, authConfig.domain, {
   languageDictionary: authConstants.languageDictionary
 });
 
+const customAuth = new Auth0.WebAuth({
+  clientID: authConfig.clientId,
+  domain: authConfig.domain,
+  responseType: "token id_token",
+  redirectUri: `${window.location.origin}/`
+});
+
 const login = () => {
   // Call the show method to display the widget.
   lock.show();
 };
 
+const customLogin = (username, password) => {
+  console.log(customAuth);
+  customAuth.login(
+    {
+      realm: "Username-Password-Authentication",
+      username,
+      password
+    },
+    (err, authResult) => {
+      if (err) {
+        console.log(err);
+        alert("Error: " + err.description);
+        return;
+      }
+      if (authResult && authResult.idToken && authResult.accessToken) {
+        setToken(authResult.accessToken, authResult.idToken);
+        window.location = window.location.origin; //redirect to main page
+      }
+    }
+  );
+};
+
 const logout = () => {
+  // Clear user token and profile data from window.localStorage
+  window.localStorage.removeItem("access_token");
+  window.localStorage.removeItem("id_token");
+  window.localStorage.removeItem("profile");
+};
+
+const customLogout = () => {
+  customAuth.logout({ returnTo: "/" });
   // Clear user token and profile data from window.localStorage
   window.localStorage.removeItem("access_token");
   window.localStorage.removeItem("id_token");
@@ -99,7 +139,9 @@ const isTokenExpired = () => {
 const AuthService = {
   lock,
   login,
+  customLogin,
   logout,
+  customLogout,
   loggedIn,
   setProfile,
   getProfile,

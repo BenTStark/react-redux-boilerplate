@@ -4,11 +4,14 @@ import AuthService from "./auth.service";
 import types from "./types";
 
 const loginRequest = () => ActionCreators.loginRequest();
-const loginSuccess = authInformation => ActionCreators.loginSuccess(authInformation);
+const loginSuccess = authInformation =>
+  ActionCreators.loginSuccess(authInformation);
 const loginError = () => ActionCreators.loginError();
 const logout = () => ActionCreators.logout();
+const toogleLoginMethod = () => ActionCreators.toogleLoginMethod();
 
 const checkLogin = () => {
+  console.log("check");
   return new Promise((resolve, reject) => {
     const payload = {},
       authInformation = {};
@@ -25,17 +28,22 @@ const checkLogin = () => {
 
 const authentication = () => {
   // Add callback for lock's `authenticated` event
+  console.log("auth");
   return new Promise((resolve, reject) => {
     const payload = {},
       authInformation = {};
     authInformation.result = "";
     authInformation.payload = payload;
     AuthService.lock.on("authenticated", authResult => {
+      console.log(authResult);
       AuthService.lock.getUserInfo(authResult.accessToken, (error, profile) => {
         if (error) {
+          console.log(error);
           authInformation.result = types.LOGIN_ERROR;
+          authInformation.payload = error;
           reject(authInformation);
         } else {
+          console.log(profile);
           AuthService.setToken(authResult.idToken, authResult.accessToken); // static method
           AuthService.setProfile(profile); // static method
           payload.profile = profile;
@@ -59,17 +67,28 @@ const handleLogin = () => {
   AuthService.login();
 };
 
+const handleCustomLogin = (username, password) => {
+  AuthService.customLogin(username, password);
+};
+
 const handleLogout = () => {
   AuthService.logout();
 };
 
+const handleCustomLogout = () => {
+  AuthService.customLogout();
+};
+
 export const AppOperations = {
   handleLogin,
+  handleCustomLogin,
   loginRequest,
   loginSuccess,
   loginError,
   handleLogout,
+  handleCustomLogout,
   logout,
+  toogleLoginMethod,
   checkLogin,
   authentication
 };

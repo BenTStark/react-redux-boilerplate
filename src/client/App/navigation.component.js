@@ -7,6 +7,8 @@ import NavItem from "react-bootstrap/lib/NavItem";
 import { AppOperations } from "./duck/operations";
 import styles from "./app.scss";
 import types from "./duck/types";
+import LoginComponent from "./login.component";
+import { Switch } from "@blueprintjs/core";
 
 export default class NavigationComponent extends Component {
   static propTypes = {
@@ -16,12 +18,14 @@ export default class NavigationComponent extends Component {
   componentWillMount() {
     // Check for credentials in window.localStorage
     AppOperations.checkLogin().then(response => {
+      console.log(response);
       if (response.result === types.LOGIN_SUCCESS) {
         this.props.loginSuccess(response.payload);
       }
     });
     // check Auth0 for credentials
     AppOperations.authentication().then(response => {
+      console.log(response);
       switch (response.result) {
         case types.LOGIN_SUCCESS:
           this.props.loginSuccess(response.payload);
@@ -34,16 +38,29 @@ export default class NavigationComponent extends Component {
   }
 
   handleLogin = () => {
-    //event.preventDefault();
     AppOperations.handleLogin();
     this.props.loginRequest();
   };
 
+  handleCustomLogin = loginInformation => {
+    AppOperations.handleCustomLogin(
+      loginInformation.login,
+      loginInformation.password
+    );
+  };
+
   handleLogout = () => {
-    //event.preventDefault();
     this.props.logout();
     AppOperations.handleLogout(); // careful, this is a static method
     this.props.pushHistory("/");
+  };
+
+  handleCustomLogout = () => {
+    AppOperations.handleCustomLogout();
+  };
+
+  handlePublicChange = () => {
+    this.props.toogleLoginMethod();
   };
 
   render() {
@@ -62,13 +79,33 @@ export default class NavigationComponent extends Component {
           </Navbar.Header>
 
           <Navbar.Collapse>
+            {!this.props.auth.loginSuccess && (
+              <Switch
+                checked={this.props.auth.useLock}
+                label="Benutze Auth0 Lock"
+                onChange={this.handlePublicChange}
+              />
+            )}
             <Nav navbar>
-              {!this.props.auth.loginSuccess && (
-                <NavItem onClick={this.handleLogin}>Login</NavItem>
-              )}
-              {this.props.auth.loginSuccess && (
-                <NavItem onClick={this.handleLogout}>Logout</NavItem>
-              )}
+              {!this.props.auth.loginSuccess &&
+                this.props.auth.useLock && (
+                  <NavItem onClick={this.handleLogin}>Login Lock</NavItem>
+                )}
+              {!this.props.auth.loginSuccess &&
+                !this.props.auth.useLock && (
+                  <LoginComponent onSubmit={this.handleCustomLogin} />
+                )}
+              {this.props.auth.loginSuccess &&
+                this.props.auth.useLock && (
+                  <NavItem onClick={this.handleLogout}>Logout Lock</NavItem>
+                )}
+              {this.props.auth.loginSuccess &&
+                !this.props.auth.useLock && (
+                  <NavItem onClick={this.handleCustomLogout}>
+                    Logout Custom
+                  </NavItem>
+                )}
+
               <LinkContainer to="/otherRoute">
                 <NavItem>Other Route</NavItem>
               </LinkContainer>
@@ -77,6 +114,9 @@ export default class NavigationComponent extends Component {
               </LinkContainer>
               <LinkContainer to="/contact">
                 <NavItem>Contact</NavItem>
+              </LinkContainer>
+              <LinkContainer to="/calendar">
+                <NavItem>Calendar</NavItem>
               </LinkContainer>
             </Nav>
             {this.props.auth.loginSuccess && (
