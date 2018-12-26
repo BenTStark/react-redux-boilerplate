@@ -23,6 +23,9 @@ export default class HomeComponent extends Component {
         <pre>{JSON.stringify(this.props.contact, null, 2)}</pre>
         <p>Local Storage</p>
         <pre>{JSON.stringify(window.localStorage, null, 2)}</pre>
+        <p>Environment</p>
+        <p>{process.env.EMAILJS_USERID}</p>
+        <p>{process.env.EMAILJS_TEMPLATEID}</p>
       </div>
     );
   }

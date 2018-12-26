@@ -1,11 +1,11 @@
 Arguments: 
-  /usr/bin/node /usr/bin/yarn add @blueprintjs/icon
+  /usr/bin/node /home/mirrorpi/.yarn/bin/yarn.js add node-mailjet
 
 PATH: 
-  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games:/home/mirrorpi/git/templates/toolbox
+  /home/mirrorpi/.yarn/bin:/home/mirrorpi/.config/yarn/global/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games:/home/mirrorpi/git/templates/toolbox
 
 Yarn version: 
-  1.10.1
+  1.12.3
 
 Node version: 
   10.12.0
@@ -14,17 +14,7 @@ Platform:
   linux arm
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@blueprintjs%2ficon: Not found
-      at Request.params.callback [as _callback] (/usr/lib/node_modules/yarn/lib/cli.js:61073:18)
-      at Request.self.callback (/usr/lib/node_modules/yarn/lib/cli.js:120166:22)
-      at Request.emit (events.js:182:13)
-      at Request.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:121138:10)
-      at Request.emit (events.js:182:13)
-      at IncomingMessage.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:121060:12)
-      at Object.onceWrapper (events.js:273:13)
-      at IncomingMessage.emit (events.js:187:15)
-      at endReadableNT (_stream_readable.js:1094:12)
-      at process._tickCallback (internal/process/next_tick.js:63:19)
+  Error: ENOENT: no such file or directory, open '/home/mirrorpi/.cache/yarn/v4/npm-fsevents-1.2.4-f41dcb1af2582af3692da36fc55cbd8e1041c426/node_modules/fsevents/.yarn-metadata.json'
 
 npm manifest: 
   {
@@ -7066,10 +7056,15 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
     integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
   
-  qs@6.5.2, qs@^6.4.0, qs@^6.5.1, qs@~6.5.2:
+  qs@6.5.2, qs@^6.4.0, qs@~6.5.2:
     version "6.5.2"
     resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
     integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
+  
+  qs@^6.5.1:
+    version "6.6.0"
+    resolved "https://registry.yarnpkg.com/qs/-/qs-6.6.0.tgz#a99c0f69a8d26bf7ef012f871cdabb0aee4424c2"
+    integrity sha512-KIJqT9jQJDQx5h5uAVPimw6yVg2SekOKu959OCtktD3FjzbpvaPr8i4zzg07DOMz+igA4W/aNM7OV8H37pFYfA==
   
   querystring-es3@^0.2.0:
     version "0.2.1"
@@ -8124,6 +8119,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/slash/-/slash-2.0.0.tgz#de552851a1759df3a8f206535442f5ec4ddeab44"
     integrity sha512-ZYKh3Wh2z1PpEXWr0MpSBZ0V6mZHAQfYevttO11c51CaWjGTaadiKZ+wVt1PbMlDV5qhMFslpZCemhwOK7C89A==
   
+  smart-buffer@^4.0.1:
+    version "4.0.1"
+    resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-4.0.1.tgz#07ea1ca8d4db24eb4cac86537d7d18995221ace3"
+    integrity sha512-RFqinRVJVcCAL9Uh1oVqE6FZkqsyLiVOYEZ20TqIOjuX7iFVJ+zsbs4RIghnw/pTs7mZvt8ZHhvm1ZUrR4fykg==
+  
   snake-case@^2.1.0:
     version "2.1.0"
     resolved "https://registry.yarnpkg.com/snake-case/-/snake-case-2.1.0.tgz#41bdb1b73f30ec66a04d4e2cad1b76387d4d6d9f"
@@ -8180,6 +8180,14 @@ Lockfile:
     dependencies:
       faye-websocket "^0.10.0"
       uuid "^3.0.1"
+  
+  socks@^2.2.2:
+    version "2.2.2"
+    resolved "https://registry.yarnpkg.com/socks/-/socks-2.2.2.tgz#f061219fc2d4d332afb4af93e865c84d3fa26e2b"
+    integrity sha512-g6wjBnnMOZpE0ym6e0uHSddz9p3a+WsBaaYQaBaSCJYvrC4IXykQR9MNGjLQf38e9iIIhp3b1/Zk8YZI3KGJ0Q==
+    dependencies:
+      ip "^1.1.5"
+      smart-buffer "^4.0.1"
   
   source-list-map@^2.0.0:
     version "2.0.1"

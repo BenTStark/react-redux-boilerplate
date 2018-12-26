@@ -7,6 +7,7 @@ import styles from "./contact.scss";
 
 export default class ContactComponent extends Component {
   submitMessage = contactFormResult => {
+    ContactOperations.sendMail(contactFormResult);
     const id = array => {
       return array.length ? Math.max(...array) : 0;
     };

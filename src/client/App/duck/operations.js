@@ -11,7 +11,6 @@ const logout = () => ActionCreators.logout();
 const toogleLoginMethod = () => ActionCreators.toogleLoginMethod();
 
 const checkLogin = () => {
-  console.log("check");
   return new Promise((resolve, reject) => {
     const payload = {},
       authInformation = {};
@@ -28,7 +27,6 @@ const checkLogin = () => {
 
 const authentication = () => {
   // Add callback for lock's `authenticated` event
-  console.log("auth");
   return new Promise((resolve, reject) => {
     const payload = {},
       authInformation = {};

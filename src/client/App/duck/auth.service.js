@@ -34,12 +34,12 @@ const login = () => {
 };
 
 const customLogin = (username, password) => {
-  console.log(customAuth);
+  console.log(util.inspect(customAuth.login));
   customAuth.login(
     {
       realm: "Username-Password-Authentication",
-      username,
-      password
+      username: username,
+      password: password
     },
     (err, authResult) => {
       if (err) {
@@ -49,7 +49,7 @@ const customLogin = (username, password) => {
       }
       if (authResult && authResult.idToken && authResult.accessToken) {
         setToken(authResult.accessToken, authResult.idToken);
-        window.location = window.location.origin; //redirect to main page
+        //window.location = window.location.origin; //redirect to main page
       }
     }
   );

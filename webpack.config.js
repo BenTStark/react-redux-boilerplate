@@ -2,11 +2,11 @@ const path = require("path");
 var _ = require("lodash");
 var minimist = require("minimist");
 var chalk = require("chalk");
-//var webpack = require('webpack');
 
 const nodeExternals = require("webpack-node-externals");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 var CleanWebpackPlugin = require("clean-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 
 const moduleObj = {
   rules: [
@@ -67,7 +67,8 @@ var DEFAULT_PARAMS = {
   plugins: [
     new HtmlWebPackPlugin({
       template: "src/client/index.html"
-    })
+    }),
+    new Dotenv()
   ]
 };
 

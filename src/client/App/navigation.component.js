@@ -16,25 +16,28 @@ export default class NavigationComponent extends Component {
   };
 
   componentWillMount() {
-    // Check for credentials in window.localStorage
-    AppOperations.checkLogin().then(response => {
-      console.log(response);
-      if (response.result === types.LOGIN_SUCCESS) {
-        this.props.loginSuccess(response.payload);
-      }
-    });
-    // check Auth0 for credentials
-    AppOperations.authentication().then(response => {
-      console.log(response);
-      switch (response.result) {
-        case types.LOGIN_SUCCESS:
+    if (this.props.auth.useLock) {
+      // Check for credentials in window.localStorage
+      AppOperations.checkLogin().then(response => {
+        console.log(response);
+        if (response.result === types.LOGIN_SUCCESS) {
           this.props.loginSuccess(response.payload);
-          this.props.pushHistory("/");
-        case types.LOGIN_ERROR:
-          this.props.loginError();
-          this.props.pushHistory("/");
-      }
-    });
+        }
+      });
+      // check Auth0 for credentials
+      AppOperations.authentication().then(response => {
+        console.log(response);
+        switch (response.result) {
+          case types.LOGIN_SUCCESS:
+            this.props.loginSuccess(response.payload);
+            this.props.pushHistory("/");
+          case types.LOGIN_ERROR:
+            this.props.loginError();
+            this.props.pushHistory("/");
+        }
+      });
+    } else {
+    }
   }
 
   handleLogin = () => {
@@ -79,32 +82,34 @@ export default class NavigationComponent extends Component {
           </Navbar.Header>
 
           <Navbar.Collapse>
-            {!this.props.auth.loginSuccess && (
+            // Test whether I can make a custom Login with auth0. So far it
+            // didn't work out. :(
+            {/*!this.props.auth.loginSuccess && (
               <Switch
                 checked={this.props.auth.useLock}
                 label="Benutze Auth0 Lock"
                 onChange={this.handlePublicChange}
               />
-            )}
+            )*/}
             <Nav navbar>
               {!this.props.auth.loginSuccess &&
                 this.props.auth.useLock && (
                   <NavItem onClick={this.handleLogin}>Login Lock</NavItem>
                 )}
-              {!this.props.auth.loginSuccess &&
+              {/*!this.props.auth.loginSuccess &&
                 !this.props.auth.useLock && (
                   <LoginComponent onSubmit={this.handleCustomLogin} />
-                )}
+                )*/}
               {this.props.auth.loginSuccess &&
                 this.props.auth.useLock && (
                   <NavItem onClick={this.handleLogout}>Logout Lock</NavItem>
                 )}
-              {this.props.auth.loginSuccess &&
+              {/*this.props.auth.loginSuccess &&
                 !this.props.auth.useLock && (
                   <NavItem onClick={this.handleCustomLogout}>
                     Logout Custom
                   </NavItem>
-                )}
+                )*/}
 
               <LinkContainer to="/otherRoute">
                 <NavItem>Other Route</NavItem>

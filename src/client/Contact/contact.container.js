@@ -8,9 +8,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  const submitMessage = contactFormResult =>
+  const submitMessage = contactFormResult => {
     dispatch(ContactOperations.submitMessage(contactFormResult));
-
+  };
   return {
     submitMessage
   };

@@ -9,9 +9,6 @@ import { object } from "prop-types";
 let ContactFormComponent = props => {
   return (
     <div>
-      <div>
-        hallo {props.name}. hier sind die Props: {JSON.stringify(props, 0, 4)}
-      </div>
       <Form
         onSubmit={props.onSubmit}
         render={({ handleSubmit, pristine, reset, submitting }) => (
@@ -32,7 +29,10 @@ let ContactFormComponent = props => {
               <label htmlFor="message">Nachricht</label>
               <Field name="message" component="input" type="text" />
             </div>
-            <button type="submit" disabled={pristine || submitting}>
+            <button
+              type="submit"
+              disabled={pristine || submitting}
+            >
               Submit
             </button>
             <button
